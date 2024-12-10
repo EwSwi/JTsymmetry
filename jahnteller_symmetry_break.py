@@ -36,7 +36,7 @@ def create_c_dag(site_index, orbital_index, spin, N_sites, N_orbitals):
             #bitlike + - declare if no occupation for full hs 
             new_state_binary = list(binary_state)
             new_state_binary[position] = '1'
-            new_state_index = int(''.join(new_state_binary)[::-1], 2)  #for (likely logical) some reason going backwards works, going forward does not.
+            new_state_index = int(''.join(new_state_binary)[::-1], 2)
 
             # fermionic anticommutation reltion for 2nd quant fermion
             sign = (-1) ** sum(int(bit) for bit in binary_state[:position])
@@ -84,7 +84,6 @@ dim_phonon = (N_phonon_max_x + 1) * (N_phonon_max_y + 1)
 dim_total = dim *dim_phonon
 # projection operator to project onto high low spin orbitals
 def create_projection_operator(orbitals, spins, N_sites, N_orbitals):
-    """Creates a projection operator for specified orbitals and spins."""
     P = csr_matrix((dim_total, dim_total), dtype=complex)
     for orbital in orbitals:
         for spin in spins:
